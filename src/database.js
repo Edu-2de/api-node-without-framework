@@ -51,7 +51,9 @@ export class Database {
         );
 
         if (rowIndex > -1) {
-            this.#database[table][rowIndex] = { id, ...data };
+            const existingData = this.#database[table][rowIndex];
+            this.#database[table][rowIndex] = { ...existingData, ...data, id };
+
             this.#persist();
         }
     }
